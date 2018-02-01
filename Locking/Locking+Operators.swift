@@ -46,11 +46,11 @@ extension Locking {
     /**
      Assigns the right hand side's value to the variable on the left hand side when the left hand side is optional and the right hand side is not optional.
      
-     - Warning: `rhs` value will be foreced unwrapped!
+     - Warning: `rhs` value will be forced unwrapped!
      
      - Parameters:
      - lhs: `inout` `T`
-     - rhs: `Locking<T?>` that is forceably unlocked and assigned to `lhs`
+     - rhs: `Locking<T?>` that is forced unwrapped and assigned to `lhs`
      */
     static func <=(lhs: inout T, rhs: Locking<T?>) {
         lhs = rhs.value!

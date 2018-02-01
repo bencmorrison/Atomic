@@ -29,15 +29,13 @@ struct Locking<T>: CustomStringConvertible {
     var value: T {
         get {
             var val: T!
-            
             queue.sync {
-                val = _value
+                val = self._value
             }
-            
             return val
         }
         set {
-            queue.sync {
+            queue.sync(flags: .barrier) {
                 self._value = newValue
             }
         }
@@ -52,14 +50,13 @@ struct Locking<T>: CustomStringConvertible {
     typealias EnsureBlock = (_ startValue: T) -> T
     
     /**
-     The `ensure(_)` allows you to perform complext operations on and around the locked value without fear of it changing.
+     The `ensure(_)` allows you to perform complex operations on and around the locked value without fear of it changing.
      */
     @discardableResult mutating func ensure(performBlock: EnsureBlock) -> T {
         var newValue: T!
         
-        queue.sync {
-            let preVal = self._value
-            newValue = performBlock(preVal)
+        queue.sync(flags: .barrier) {
+            newValue = performBlock(self._value)
             self._value = newValue
         }
         
@@ -85,11 +82,9 @@ struct Locking<T>: CustomStringConvertible {
      */
     func compare(with: Locking<T>, comparisonBlock: CompareBlock) -> Bool {
         var retVal = false
-        
         queue.sync {
             retVal = comparisonBlock(self._value, with.value)
         }
-        
         return retVal
     }
     
