@@ -2,23 +2,25 @@
 Simple and Thread safe structures
 
 # Examples
-### Creating an imutable lock
+### Creating a lock
 ```swift
-let lock = Locking<Int>(value: 12)
+let lockedInt = Locking<Int>(value: 12)
 ```
 
-### Crating a mutable lock
+#### Locks also support optionals
 ```swift
-var lock2 = Locking<String?>(value: "OMG")
-lock2 <= "OMG2" // New Value for lock2
+var lockedString = Locking<String?>(value: "OMG")
 ```
 
 ### Asinging Values to Locks and to varables
 ```swift
-var str: String = "nil"
-str <= lock2
+var str: String? = nil
+var strLock = Locking<String?>(value: "Test String")
 
-lock2 <= str
+str <= strLock // str now is an optional string with the value "Test String"
+
+str = "Another Test String"
+strLock <= str // strLock now is an optional string with the value "Another Test String"
 ```
 
 # Functions
