@@ -14,13 +14,10 @@ import Foundation
 struct Locking<T>: CustomStringConvertible {
     // MARK: - Private Instance Variables
     private var _value: T
-    private let queue = DispatchQueue(label: "com.bencmorrson.locking<t>",
-                                      qos: .default,
-                                      attributes: .concurrent,
-                                      autoreleaseFrequency: .inherit,
-                                      target: nil)
+    private let semaphore = DispatchSemaphore(value: 1)
+
     init(_ value: T) {
-        self._value = value
+        _value = value
     }
     
     /**
@@ -28,16 +25,21 @@ struct Locking<T>: CustomStringConvertible {
      */
     var value: T {
         get {
-            var val: T!
-            queue.sync {
-                val = self._value
+            semaphore.wait()
+            defer {
+                semaphore.signal()
             }
+
+            let val = _value
             return val
         }
         set {
-            queue.sync(flags: .barrier) {
-                self._value = newValue
+            semaphore.wait()
+            defer {
+                semaphore.signal()
             }
+
+            _value = newValue
         }
     }
     
@@ -53,12 +55,13 @@ struct Locking<T>: CustomStringConvertible {
      The `ensure(_)` allows you to perform complex operations on and around the locked value without fear of it changing.
      */
     @discardableResult mutating func ensure(performBlock: EnsureBlock) -> T {
-        var newValue: T!
-        
-        queue.sync(flags: .barrier) {
-            newValue = performBlock(self._value)
-            self._value = newValue
+        semaphore.wait()
+        defer {
+            semaphore.signal()
         }
+
+        let newValue = performBlock(_value)
+        _value = newValue
         
         return newValue
     }
@@ -81,11 +84,12 @@ struct Locking<T>: CustomStringConvertible {
      - Returns: The results of the comparison.
      */
     func compare(with: Locking<T>, comparisonBlock: CompareBlock) -> Bool {
-        var retVal = false
-        queue.sync {
-            retVal = comparisonBlock(self._value, with.value)
+        semaphore.wait()
+        defer {
+            semaphore.signal()
         }
-        return retVal
+
+        return comparisonBlock(self._value, with.value)
     }
     
     //MARK: - CustomStringConvertible
