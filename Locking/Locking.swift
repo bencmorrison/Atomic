@@ -12,9 +12,9 @@ import Foundation
  Wraps a type in a queue to perform serial operations on that value. This allows for many thread access to the wrapped value without worry of it being changed randomly.
  */
 struct Locking<T>: CustomStringConvertible {
-    // MARK: - Private Instance Variables
     private var _value: T
     private let semaphore = DispatchSemaphore(value: 1)
+    private let uuid = UUID()
 
     init(_ value: T) {
         _value = value
@@ -26,18 +26,13 @@ struct Locking<T>: CustomStringConvertible {
     var value: T {
         get {
             semaphore.wait()
-            defer {
-                semaphore.signal()
-            }
+            defer { semaphore.signal() }
 
-            let val = _value
-            return val
+            return _value
         }
         set {
             semaphore.wait()
-            defer {
-                semaphore.signal()
-            }
+            defer { semaphore.signal() }
 
             _value = newValue
         }
@@ -56,14 +51,10 @@ struct Locking<T>: CustomStringConvertible {
      */
     @discardableResult mutating func ensure(performBlock: EnsureBlock) -> T {
         semaphore.wait()
-        defer {
-            semaphore.signal()
-        }
+        defer { semaphore.signal() }
 
-        let newValue = performBlock(_value)
-        _value = newValue
-        
-        return newValue
+        _value = performBlock(_value)
+        return _value
     }
     
     /**
@@ -85,15 +76,21 @@ struct Locking<T>: CustomStringConvertible {
      */
     func compare(with: Locking<T>, comparisonBlock: CompareBlock) -> Bool {
         semaphore.wait()
-        defer {
-            semaphore.signal()
-        }
+        defer { semaphore.signal() }
 
         return comparisonBlock(self._value, with.value)
     }
     
     //MARK: - CustomStringConvertible
     var description: String {
-        return String(describing: _value)
+        semaphore.wait()
+        defer { semaphore.signal() }
+        
+        return """
+        Locking<\(String(describing: T.self))> {
+            value: \(String(describing: _value))
+            uuid: \(uuid.uuidString),
+        }
+        """
     }
 }

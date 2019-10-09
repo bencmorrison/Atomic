@@ -45,7 +45,7 @@ class LockingTest_Operators: XCTestCase {
     }
     
     func testAssigningOptionalLockingToNonOptionalRaw() {
-        var sut1: String = "Raw String"
+        var sut1: String? = "Raw String"
         let sut2 = Locking<String?>("SUT 2")
         
         sut1 <= sut2
