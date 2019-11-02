@@ -51,10 +51,11 @@ struct Locking<T>: CustomStringConvertible {
      */
     @discardableResult mutating func ensure(performBlock: EnsureBlock) -> T {
         semaphore.wait()
-        defer { semaphore.signal() }
-
-        _value = performBlock(_value)
-        return _value
+        let retVal = performBlock(_value)
+        _value = retVal
+        semaphore.signal()
+        
+        return retVal
     }
     
     /**
@@ -76,9 +77,10 @@ struct Locking<T>: CustomStringConvertible {
      */
     func compare(with: Locking<T>, comparisonBlock: CompareBlock) -> Bool {
         semaphore.wait()
-        defer { semaphore.signal() }
+        let retVal = comparisonBlock(self._value, with.value)
+        semaphore.signal()
 
-        return comparisonBlock(self._value, with.value)
+        return retVal
     }
     
     //MARK: - CustomStringConvertible
