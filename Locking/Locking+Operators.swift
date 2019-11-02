@@ -48,7 +48,7 @@ extension Locking {
      
      - Parameters:
         - lhs: `inout` `T?`
-        - rhs: `Locking<T?>` that is forced unwrapped and assigned to `lhs`
+        - rhs: `Locking<T?>`
      */
     static func <=(lhs: inout T?, rhs: Locking<T?>) {
         lhs = rhs.value
