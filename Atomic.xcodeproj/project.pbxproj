@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B55730242014762A0069B894 /* Locking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B557301A2014762A0069B894 /* Locking.framework */; };
-		B55730292014762A0069B894 /* LockingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55730282014762A0069B894 /* LockingTests.swift */; };
-		B557302B2014762A0069B894 /* Locking.h in Headers */ = {isa = PBXBuildFile; fileRef = B557301D2014762A0069B894 /* Locking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B5573035201476410069B894 /* Locking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5573034201476410069B894 /* Locking.swift */; };
-		B5573037201476670069B894 /* Locking+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5573036201476670069B894 /* Locking+Operators.swift */; };
-		B5573039201484710069B894 /* LockingTest+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5573038201484710069B894 /* LockingTest+Operators.swift */; };
+		B55730242014762A0069B894 /* Atomic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B557301A2014762A0069B894 /* Atomic.framework */; };
+		B55730292014762A0069B894 /* AtomicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55730282014762A0069B894 /* AtomicTests.swift */; };
+		B557302B2014762A0069B894 /* Atmoic.h in Headers */ = {isa = PBXBuildFile; fileRef = B557301D2014762A0069B894 /* Atmoic.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B5573035201476410069B894 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5573034201476410069B894 /* Atomic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,15 +24,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B557301A2014762A0069B894 /* Locking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Locking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B557301D2014762A0069B894 /* Locking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Locking.h; sourceTree = "<group>"; };
+		B557301A2014762A0069B894 /* Atomic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Atomic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B557301D2014762A0069B894 /* Atmoic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Atmoic.h; sourceTree = "<group>"; };
 		B557301E2014762A0069B894 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B55730232014762A0069B894 /* LockingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LockingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B55730282014762A0069B894 /* LockingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockingTests.swift; sourceTree = "<group>"; };
+		B55730232014762A0069B894 /* AtomicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtomicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B55730282014762A0069B894 /* AtomicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicTests.swift; sourceTree = "<group>"; };
 		B557302A2014762A0069B894 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5573034201476410069B894 /* Locking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locking.swift; sourceTree = "<group>"; };
-		B5573036201476670069B894 /* Locking+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locking+Operators.swift"; sourceTree = "<group>"; };
-		B5573038201484710069B894 /* LockingTest+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LockingTest+Operators.swift"; sourceTree = "<group>"; };
+		B5573034201476410069B894 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B55730242014762A0069B894 /* Locking.framework in Frameworks */,
+				B55730242014762A0069B894 /* Atomic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,8 +55,8 @@
 		B55730102014762A0069B894 = {
 			isa = PBXGroup;
 			children = (
-				B557301C2014762A0069B894 /* Locking */,
-				B55730272014762A0069B894 /* LockingTests */,
+				B557301C2014762A0069B894 /* Atomic */,
+				B55730272014762A0069B894 /* AtomicTests */,
 				B557301B2014762A0069B894 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,31 +64,29 @@
 		B557301B2014762A0069B894 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B557301A2014762A0069B894 /* Locking.framework */,
-				B55730232014762A0069B894 /* LockingTests.xctest */,
+				B557301A2014762A0069B894 /* Atomic.framework */,
+				B55730232014762A0069B894 /* AtomicTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B557301C2014762A0069B894 /* Locking */ = {
+		B557301C2014762A0069B894 /* Atomic */ = {
 			isa = PBXGroup;
 			children = (
-				B557301D2014762A0069B894 /* Locking.h */,
-				B5573034201476410069B894 /* Locking.swift */,
-				B5573036201476670069B894 /* Locking+Operators.swift */,
+				B557301D2014762A0069B894 /* Atmoic.h */,
+				B5573034201476410069B894 /* Atomic.swift */,
 				B557301E2014762A0069B894 /* Info.plist */,
 			);
-			path = Locking;
+			path = Atomic;
 			sourceTree = "<group>";
 		};
-		B55730272014762A0069B894 /* LockingTests */ = {
+		B55730272014762A0069B894 /* AtomicTests */ = {
 			isa = PBXGroup;
 			children = (
-				B55730282014762A0069B894 /* LockingTests.swift */,
-				B5573038201484710069B894 /* LockingTest+Operators.swift */,
+				B55730282014762A0069B894 /* AtomicTests.swift */,
 				B557302A2014762A0069B894 /* Info.plist */,
 			);
-			path = LockingTests;
+			path = AtomicTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,16 +96,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B557302B2014762A0069B894 /* Locking.h in Headers */,
+				B557302B2014762A0069B894 /* Atmoic.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		B55730192014762A0069B894 /* Locking */ = {
+		B55730192014762A0069B894 /* Atomic */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B557302E2014762A0069B894 /* Build configuration list for PBXNativeTarget "Locking" */;
+			buildConfigurationList = B557302E2014762A0069B894 /* Build configuration list for PBXNativeTarget "Atomic" */;
 			buildPhases = (
 				B55730152014762A0069B894 /* Sources */,
 				B55730162014762A0069B894 /* Frameworks */,
@@ -122,14 +116,14 @@
 			);
 			dependencies = (
 			);
-			name = Locking;
+			name = Atomic;
 			productName = Locking;
-			productReference = B557301A2014762A0069B894 /* Locking.framework */;
+			productReference = B557301A2014762A0069B894 /* Atomic.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B55730222014762A0069B894 /* LockingTests */ = {
+		B55730222014762A0069B894 /* AtomicTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B55730312014762A0069B894 /* Build configuration list for PBXNativeTarget "LockingTests" */;
+			buildConfigurationList = B55730312014762A0069B894 /* Build configuration list for PBXNativeTarget "AtomicTests" */;
 			buildPhases = (
 				B557301F2014762A0069B894 /* Sources */,
 				B55730202014762A0069B894 /* Frameworks */,
@@ -140,9 +134,9 @@
 			dependencies = (
 				B55730262014762A0069B894 /* PBXTargetDependency */,
 			);
-			name = LockingTests;
+			name = AtomicTests;
 			productName = LockingTests;
-			productReference = B55730232014762A0069B894 /* LockingTests.xctest */;
+			productReference = B55730232014762A0069B894 /* AtomicTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -152,7 +146,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = "Benjamin C Morrison";
 				TargetAttributes = {
 					B55730192014762A0069B894 = {
@@ -167,7 +161,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B55730142014762A0069B894 /* Build configuration list for PBXProject "Locking" */;
+			buildConfigurationList = B55730142014762A0069B894 /* Build configuration list for PBXProject "Atomic" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -180,8 +174,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B55730192014762A0069B894 /* Locking */,
-				B55730222014762A0069B894 /* LockingTests */,
+				B55730192014762A0069B894 /* Atomic */,
+				B55730222014762A0069B894 /* AtomicTests */,
 			);
 		};
 /* End PBXProject section */
@@ -208,8 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5573035201476410069B894 /* Locking.swift in Sources */,
-				B5573037201476670069B894 /* Locking+Operators.swift in Sources */,
+				B5573035201476410069B894 /* Atomic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,8 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B55730292014762A0069B894 /* LockingTests.swift in Sources */,
-				B5573039201484710069B894 /* LockingTest+Operators.swift in Sources */,
+				B55730292014762A0069B894 /* AtomicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,7 +219,7 @@
 /* Begin PBXTargetDependency section */
 		B55730262014762A0069B894 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B55730192014762A0069B894 /* Locking */;
+			target = B55730192014762A0069B894 /* Atomic */;
 			targetProxy = B55730252014762A0069B894 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -258,6 +250,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -284,7 +277,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -320,6 +313,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -340,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -361,10 +355,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Locking/Info.plist;
+				INFOPLIST_FILE = Atomic/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bencmorrison.Locking;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bencmorrison.Atomic;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -384,10 +379,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Locking/Info.plist;
+				INFOPLIST_FILE = Atomic/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bencmorrison.Locking;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bencmorrison.Atomic;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -401,7 +397,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4B35ZUZXEQ;
-				INFOPLIST_FILE = LockingTests/Info.plist;
+				INFOPLIST_FILE = AtomicTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bencmorrison.LockingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -416,7 +412,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4B35ZUZXEQ;
-				INFOPLIST_FILE = LockingTests/Info.plist;
+				INFOPLIST_FILE = AtomicTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bencmorrison.LockingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -428,7 +424,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B55730142014762A0069B894 /* Build configuration list for PBXProject "Locking" */ = {
+		B55730142014762A0069B894 /* Build configuration list for PBXProject "Atomic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B557302C2014762A0069B894 /* Debug */,
@@ -437,7 +433,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B557302E2014762A0069B894 /* Build configuration list for PBXNativeTarget "Locking" */ = {
+		B557302E2014762A0069B894 /* Build configuration list for PBXNativeTarget "Atomic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B557302F2014762A0069B894 /* Debug */,
@@ -446,7 +442,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B55730312014762A0069B894 /* Build configuration list for PBXNativeTarget "LockingTests" */ = {
+		B55730312014762A0069B894 /* Build configuration list for PBXNativeTarget "AtomicTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B55730322014762A0069B894 /* Debug */,
