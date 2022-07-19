@@ -60,4 +60,49 @@ public struct Atomic<T> {
         value = closure(value)
         return value
     }
+    
+    /**
+     The `holdWhile(_:)` function uses a closure to allow operations to happen with
+     the Atomic value while preventing changes to the value.
+     - Parameter value: The current value of the wrapped value
+     */
+    public typealias HoldClosure = (_ value: T) -> ()
+    
+    /**
+     Allows you to hold the value of the Atomic object while the closure
+     is being executed. No changes to the value will happen.
+     - Parameter closure: The closure that is doing the work with the
+                          value.
+     */
+    public func holdWhile(_ closure: HoldClosure) {
+        lock.readLock()
+        defer { lock.unlock() }
+        closure(value)
+    }
+    
+    
+    private let holding = Holding()
+    
+    /**
+     Allows the placement of an indefinate hold on the value while work is being done.
+     - Note: a `fatalError` will occure when a `hold()` is not matched with a `release()`
+             before another hold is called
+     - Returns: The current value
+     */
+    @discardableResult
+    public mutating func hold() -> T {
+        lock.readLock()
+        guard holding.placeHold() else { fatalError("Atomic is already holding the value") }
+        return value
+    }
+    
+    /**
+     Removes the placement of an indefinate hold on the value while work is being done.
+     - Note: a `fatalError` will occure when a `hold()` is not matched with a `release()`
+             before another hold is called
+     */
+    public mutating func release() {
+        guard holding.removeHold() else { fatalError("Atomic is not already holding the value") }
+        lock.unlock()
+    }
 }
