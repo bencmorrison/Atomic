@@ -90,7 +90,7 @@ public struct Atomic<T> {
      - Returns: The current value
      */
     @discardableResult
-    public mutating func hold() -> T {
+    public func hold() -> T {
         lock.readLock()
         guard holding.placeHold() else { fatalError("Atomic is already holding the value") }
         return value
@@ -101,7 +101,7 @@ public struct Atomic<T> {
      - Note: a `fatalError` will occure when a `hold()` is not matched with a `release()`
              before another hold is called
      */
-    public mutating func release() {
+    public func release() {
         guard holding.removeHold() else { fatalError("Atomic is not already holding the value") }
         lock.unlock()
     }

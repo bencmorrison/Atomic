@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 internal final class ReadWriteLock {
     private var pThreadLock: pthread_rwlock_t
     
