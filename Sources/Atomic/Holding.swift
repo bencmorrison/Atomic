@@ -11,21 +11,33 @@ internal final class Holding {
     private let lock = ReadWriteLock()
     private var isHolding: Bool = false
     
-    func placeHold() -> Bool {
+    func hold() throws {
         lock.writeLock()
         defer { lock.unlock() }
         
-        guard !isHolding else { return false }
+        guard !isHolding else { throw HoldingError.holdAlreadyPlaced }
         isHolding = true
-        return true
     }
     
-    func removeHold() -> Bool {
+    func release() throws {
         lock.writeLock()
         defer { lock.unlock() }
         
-        guard isHolding else { return false }
+        guard isHolding else { throw HoldingError.missmatchedReleaseHold }
         isHolding = false
-        return true
+    }
+}
+
+enum HoldingError: Error, CustomStringConvertible {
+    case holdAlreadyPlaced
+    case missmatchedReleaseHold
+    
+    var isFatal: Bool { true }
+    
+    var description: String {
+        switch self {
+        case .holdAlreadyPlaced: return "Fatal Error, hold already placed on object."
+        case .missmatchedReleaseHold: return "Fatal Error, no hold to release on object."
+        }
     }
 }
