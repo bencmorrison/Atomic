@@ -8,18 +8,14 @@
 import Foundation
 
 extension Atomic: Codable where T: Codable {
-    private enum CodingKeys: CodingKey {
-        case value
-    }
-    
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let value = try container.decode(T.self, forKey: .value)
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(T.self)
         self.init(value)
     }
     
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(value, forKey: .value)
+        var container = encoder.singleValueContainer()
+        try container.encode(value)
     }
 }
