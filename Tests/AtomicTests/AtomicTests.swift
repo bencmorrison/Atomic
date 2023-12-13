@@ -35,7 +35,7 @@ final class AtomicTests: XCTestCase {
         
         testVal = 100
         
-        let afterModify = sut.modify { value in
+        let afterModify = sut.modifyAfter { value in
             return testVal
         }
         

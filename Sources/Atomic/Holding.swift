@@ -1,13 +1,8 @@
-//
-//  File.swift
-//  
-//
-//  Created by Benjamin Morrison on 19/7/2022.
-//
+// Copyright © 2023 Ben Morrison. All rights reserved.
 
 import Foundation
 
-internal final class Holding {
+final class Holding {
     private let lock = ReadWriteLock()
     private var isHolding: Bool = false
     
