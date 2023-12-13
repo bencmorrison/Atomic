@@ -33,12 +33,21 @@ atomic.set("New Atomic String")
  The `holdWhile(_)` function has a similar function
  but the value has no modifcations.
  */
-atomic.modify { value in 
+atomic.modifyAfter { value in 
     if value == "New Atomic String" {
         return "New " + value
     } else {
         return "Well New String Again"
     }
+}
+
+/*
+ Allows modifying of the atomic value directly. Useful for
+ things like collections. It does not return anything.
+*/
+
+atomic.modifyIn { value in 
+    value.append(contentsOf: ["Some", "elements"])
 }
 
 /*
