@@ -4,8 +4,8 @@ import Foundation
 
 extension Atomic: Comparable where T: Comparable {
     public static func < (lhs: Atomic<T>, rhs: Atomic<T>) -> Bool {
-        lhs.lock.readLock()
-        rhs.lock.readLock()
+        lhs.lock.lock()
+        rhs.lock.lock()
         defer {
             lhs.lock.unlock()
             rhs.lock.unlock()

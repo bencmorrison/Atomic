@@ -2,9 +2,9 @@
 
 import Foundation
 
-/// A wrapper for the type that allows atomic access and modifcation of the wrapped value.
+/// A wrapper for the type that allows atomic access and modification of the wrapped value.
 public struct Atomic<T> {
-    internal let lock = ReadWriteLock()
+    internal let lock = NSRecursiveLock()
     internal var value: T
     
     public init(_ value: T) {
@@ -14,15 +14,15 @@ public struct Atomic<T> {
     /// Atomic getting for the value that has been wrapped for atomic access.
     /// - Returns: The stored value of the defined type
     public func get() -> T {
-        lock.readLock()
+        lock.lock()
         defer { lock.unlock() }
         return value
     }
     
     /// Sets the wrapped value to the new value.
-    /// - Parameter newVaule: The value to update the wrapped value to
+    /// - Parameter newValue: The value to update the wrapped value to
     public mutating func set(_ newValue: T) {
-        lock.writeLock()
+        lock.lock()
         defer { lock.unlock() }
         value = newValue
     }
@@ -34,7 +34,7 @@ public struct Atomic<T> {
     public typealias ModifyAfterClosure = (_ value: T) -> T
     
     /// Allows modification to happen to the wrapped value. While the closure
-    /// is being executed, the wrapped value is guarenteed to not be changed.
+    /// is being executed, the wrapped value is guaranteed to not be changed.
     /// - Parameter closure: The closure that will do the work and return the new
     ///                      value for the wrapped value.
     /// - Returns: The new value of the wrapped value (discardable).
@@ -51,7 +51,7 @@ public struct Atomic<T> {
     /// - Returns: The new value of the wrapped value (discardable).
     @discardableResult
     public mutating func modifyAfter(_ closure: ModifyAfterClosure) -> T {
-        lock.writeLock()
+        lock.lock()
         defer { lock.unlock() }
         value = closure(value)
         return value
@@ -69,7 +69,7 @@ public struct Atomic<T> {
     /// - Returns: The new value of the wrapped value (discardable).
     @discardableResult
     public mutating func modifyIn(_ closure: ModifingInClosure) -> T {
-        lock.writeLock()
+        lock.lock()
         defer { lock.unlock() }
         closure(&value)
         return value
@@ -85,28 +85,28 @@ public struct Atomic<T> {
     /// - Parameter closure: The closure that is doing the work with the
     ///                      value.
     public func holdWhile(_ closure: HoldClosure) {
-        lock.readLock()
+        lock.lock()
         defer { lock.unlock() }
         closure(value)
     }
     
-    private let holding = Holding()
+    private var isBeingHeld: Bool = false
     
-    /// Allows the placement of an indefinate hold on the value while work is being done.
-    /// - Note: a `fatalError` will occure when a `hold()` is not matched with a `release()`
+    /// Allows the placement of an indefinite hold on the value while work is being done.
+    /// - Note: a `fatalError` will occur when a `hold()` is not matched with a `release()`
     ///         before another hold is called
     /// - Returns: The current value
     public func hold() throws -> T {
-        lock.readLock()
-        try holding.hold()
+        lock.lock()
+        assert(!isBeingHeld, "You must call release() before another hold()")
         return value
     }
     
-    /// Removes the placement of an indefinate hold on the value while work is being done.
-    /// - Note: a `fatalError` will occure when a `hold()` is not matched with a `release()`
+    /// Removes the placement of an indefinite hold on the value while work is being done.
+    /// - Note: a `fatalError` will occur when a `hold()` is not matched with a `release()`
     ///         before another hold is called
     public func release() throws {
-        try holding.release()
+        assert(isBeingHeld, "You must call hold() before release()")
         lock.unlock()
     }
 }
