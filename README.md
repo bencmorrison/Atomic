@@ -17,23 +17,23 @@ This is the main Atomic class that allows you to wrap a value for atomic usage. 
 let atomic = Atomic<String>("Atomic String")
 
 // Gets the current value
-let value = atomic.get() 
+let value = atomic.get()
 
 // Sets the atomic value to the passed in value
 atomic.set("New Atomic String")
 
 /*
  Allows extended work to happen with the value and
- ensures the value will not be changed while the 
+ ensures the value will not be changed while the
  modify is running.
 
- The atomic value will be set to the returns of 
+ The atomic value will be set to the returns of
  the closure.
 
  The `holdWhile(_)` function has a similar function
  but the value has no modifcations.
  */
-atomic.modifyAfter { value in 
+atomic.modifyAfter { value in
     if value == "New Atomic String" {
         return "New " + value
     } else {
@@ -46,13 +46,13 @@ atomic.modifyAfter { value in
  things like collections. It does not return anything.
 */
 
-atomic.modifyIn { value in 
+atomic.modifyIn { value in
     value.append(contentsOf: ["Some", "elements"])
 }
 
 /*
  Allows multiple Atomics to have work done with their
- values while ensuring the values do not change. 
+ values while ensuring the values do not change.
 
  Must be paired with a `release()` after work is done.
  */
@@ -65,35 +65,3 @@ atomic.release()
 atomic2.release()
 
 ```
-
-## `SimpleAtomic<T>`
-
-This is a `propertyWrapper` that is very simplified atomic wrapper. It allows atomic get and set access but does not include all the features of `Atomic<T>`
-
-### Usage 
-
-```swift
-// Create a Simple Atomic
-@SimpleAtomic var atomic = "Another Atomic String"
-
-// Gets the value atomically
-print(atomic)
-
-// Sets the value atomically
-atomic = "New Another Atomic String"
-
-```
-
-### Do Not Do
-```swift
-@SimpleAtomic var atomic = "Another Atomic String"
-
-// LATER
-if atomic == "Another Atomic String" {
-    atomic = "Modifying " + atomic
-} else {
-    atomic = atomic + ". YAY!"
-}
-```
-
-The result of the assigment is not guarenteed to tbe the same value as the check in the if statement.
