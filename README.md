@@ -22,46 +22,14 @@ let value = atomic.get()
 // Sets the atomic value to the passed in value
 atomic.set("New Atomic String")
 
-/*
- Allows extended work to happen with the value and
- ensures the value will not be changed while the
- modify is running.
-
- The atomic value will be set to the returns of
- the closure.
-
- The `holdWhile(_)` function has a similar function
- but the value has no modifcations.
- */
-atomic.modifyAfter { value in
-    if value == "New Atomic String" {
-        return "New " + value
-    } else {
-        return "Well New String Again"
-    }
-}
-
-/*
- Allows modifying of the atomic value directly. Useful for
- things like collections. It does not return anything.
-*/
-
-atomic.modifyIn { value in
+// Modifies the value
+atomic.modify { value in
     value.append(contentsOf: ["Some", "elements"])
 }
 
-/*
- Allows multiple Atomics to have work done with their
- values while ensuring the values do not change.
-
- Must be paired with a `release()` after work is done.
- */
-let value1 = atomic.hold()
-let value2 = atomic2.hold()
-
-// do work with value1 and value 2
-
-atomic.release()
-atomic2.release()
-
+// Allows you to perform actions againtt a value
+// without the value changing
+let index = atomic.perform { value in
+    value.firstIndex(where: { $0 == "elements" })
+}
 ```
