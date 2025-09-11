@@ -18,17 +18,17 @@ import Foundation
 /// - Multiple concurrent readers: ✅ Allowed
 /// - Exclusive writer: ✅ Blocks all other operations
 /// - Recursive locking: ❌ Not supported
-public final class ReaderWriterLock: AtomicLock {
+public final class ReaderWriterLock: AtomicLock, @unchecked Sendable {
   private var rwLock = pthread_rwlock_t()
-  
+
   public init() {
     pthread_rwlock_init(&rwLock, nil)
   }
-  
+
   deinit {
     pthread_rwlock_destroy(&rwLock)
   }
-  
+
   /// Executes the given action while holding a read lock.
   ///
   /// Multiple threads can execute read operations concurrently. The action will block
@@ -42,7 +42,7 @@ public final class ReaderWriterLock: AtomicLock {
     defer { pthread_rwlock_unlock(&rwLock) }
     return try action()
   }
-  
+
   /// Executes the given action while holding an exclusive write lock.
   ///
   /// Write operations are exclusive - no other reads or writes can occur while

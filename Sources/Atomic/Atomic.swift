@@ -6,7 +6,7 @@ import Foundation
 public final class Atomic<T> {
   internal let lock: any AtomicLock
   internal var value: T
-  
+
   /// Creates an instance of Atomic that will wrap the provided value.
   /// - Parameters:
   ///   - value: The value that we want to wrap for atomic operations.
@@ -20,24 +20,24 @@ public final class Atomic<T> {
     self.lock = lock
     self.value = value
   }
-  
+
   /// Atomic getting for the value that has been wrapped for atomic access.
   /// - Returns: The stored value of the defined type
   public func get() -> T {
     lock.read { value }
   }
-  
+
   /// Sets the wrapped value to the new value.
   /// - Parameter newValue: The value to update the wrapped value to
   public func set(_ newValue: T) {
     lock.write { self.value = newValue }
   }
-  
+
   /// The `modify(_)` function uses a closure to allow operations on the wrapped
   /// value and modify the value in the closure.
   /// - Parameter value: A reference to the current wrapped value.
   public typealias ModifyClosure = (_ value: inout T) throws -> Void
-  
+
   /// Allows modification to happen to the wrapped value. While the closure
   /// is being executed, the wrapped value is guaranteed to not be changed.
   /// - Parameter closure: The closure that will do the work and return the new
@@ -55,7 +55,7 @@ public final class Atomic<T> {
   /// value and modify the value in the closure.
   /// - Parameter value: A reference to the current wrapped value.
   public typealias PerformClosure = (_ value: T) throws -> Void
-  
+
   /// Allows performing an operation while using the wrapped value. Durning
   /// the time the closure is being run, the value is guaranteed to not change.
   /// - Parameter closure: The closure that will do the work.
@@ -63,3 +63,5 @@ public final class Atomic<T> {
     try lock.read { try closure(value) }
   }
 }
+
+extension Atomic: @unchecked Sendable where T: Sendable {}
