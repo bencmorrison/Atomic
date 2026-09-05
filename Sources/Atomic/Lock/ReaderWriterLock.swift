@@ -15,9 +15,9 @@ import Foundation
 /// - You don't need recursive locking
 ///
 /// Performance characteristics:
-/// - Multiple concurrent readers: ✅ Allowed
-/// - Exclusive writer: ✅ Blocks all other operations
-/// - Recursive locking: ❌ Not supported
+/// - Multiple concurrent readers: Allowed
+/// - Exclusive writer: Blocks all other operations
+/// - Recursive locking: Not supported
 public final class ReaderWriterLock: AtomicLock, @unchecked Sendable {
   private var rwLock = pthread_rwlock_t()
 

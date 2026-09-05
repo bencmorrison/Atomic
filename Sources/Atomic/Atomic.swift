@@ -3,7 +3,7 @@
 import Foundation
 
 /// A wrapper for the type that allows atomic access and modification of the wrapped value.
-public final class Atomic<T> {
+public final class Atomic<T>: @unchecked Sendable {
   internal let lock: any AtomicLock
   internal var value: T
 
@@ -63,5 +63,3 @@ public final class Atomic<T> {
     try lock.read { try closure(value) }
   }
 }
-
-extension Atomic: @unchecked Sendable where T: Sendable {}
