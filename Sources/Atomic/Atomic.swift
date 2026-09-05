@@ -54,12 +54,14 @@ public final class Atomic<T>: @unchecked Sendable {
   /// The `perform(_)` function uses a closure to allow operations on the wrapped
   /// value and modify the value in the closure.
   /// - Parameter value: A reference to the current wrapped value.
-  public typealias PerformClosure = (_ value: T) throws -> Void
+  /// - Returns a value if closure returns a value, does not have to be the wrapped value.
+  public typealias PerformClosure<R> = (_ value: T) throws -> R
 
   /// Allows performing an operation while using the wrapped value. Durning
   /// the time the closure is being run, the value is guaranteed to not change.
   /// - Parameter closure: The closure that will do the work.
-  public func perform(_ closure: PerformClosure) rethrows {
+  /// - Returns a value if closure returns a value, does not have to be the wrapped value.
+  public func perform<R>(_ closure: PerformClosure<R>) rethrows -> R {
     try lock.read { try closure(value) }
   }
 }
