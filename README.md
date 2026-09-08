@@ -82,7 +82,7 @@ The tests use Swift Testing. Run them with `swift test`.
 To use the `Atomic` library in a SwiftPM project, add the following line to the dependencies in your Package.swift file:
 
 ```swift
-.package(url: "https://github.com/bencmorrison/Atomic.git", from: "<RELEASE_NUMBER>"),
+.package(url: "https://github.com/bencmorrison/Atomic.git", from: "4.0.0"),
 ```
 
 Then add Atomic as a dependency of the targets that use it:
