@@ -2,10 +2,6 @@
 
 Atomic is a wrapper for accessing a value atomically. Atomic is mostly just a random project that scratches an itch.
 
-## Swift Package
-
-This is now a Swift Package!
-
 ## `Atomic<T>`
 
 This is the main Atomic class that allows you to wrap a value for atomic usage. Reads and writes through the wrapper are protected by a lock. Changes made directly to objects referenced by the wrapped value are not protected.
@@ -80,3 +76,21 @@ Closures passed to `perform` and `modify` execute while a lock is held. Calling 
 ### Tests
 
 The tests use Swift Testing. Run them with `swift test`.
+
+## Adding `Atomic` as a dependency
+
+To use the `Atomic` library in a SwiftPM project, add the following line to the dependencies in your Package.swift file:
+
+```swift
+.package(url: "https://github.com/bencmorrison/Atomic.git", from: "<RELEASE_NUMBER>"),
+```
+
+Then add Atomic as a dependency of the targets that use it:
+
+```swift
+.target(name: "<target>", dependencies: [
+    .product(name: "Atomic", package: "Atomic")
+])
+```
+
+Finally, add `import Atomic` to your source code as needed.
